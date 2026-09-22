@@ -65,9 +65,7 @@ public class StoreService {
                     () -> new NotFoundException(HttpStatus.NOT_FOUND.toString())
             );
         }
-        if(products != null) {
-            newStore.setProducts(products);
-        }
+        newStore.setProducts(products);
         if(user != null) {
             newStore.setUser(user);
         }
@@ -78,7 +76,7 @@ public class StoreService {
         Store store = storeRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(HttpStatus.NOT_FOUND.toString())
         );
-        if(requestDto.name() != store.getName() && storeRepository.existsByName(requestDto.name())) {
+        if(requestDto.name().equals(store.getName())  && storeRepository.existsByName(requestDto.name())) {
             throw new AlreadyExistException(HttpStatus.CONFLICT.toString());
         }
         storeMapper.updateEntity(requestDto, store);

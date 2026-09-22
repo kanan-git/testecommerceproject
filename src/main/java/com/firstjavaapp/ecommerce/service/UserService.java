@@ -64,7 +64,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new NotFoundException(HttpStatus.NOT_FOUND.toString())
         );
-        if(requestDto.email() != user.getEmail() && userRepository.existsByEmail(requestDto.email())) {
+        if(requestDto.email().equals(user.getEmail()) && userRepository.existsByEmail(requestDto.email())) {
             throw new AlreadyExistException(HttpStatus.CONFLICT.toString());
         }
         userMapper.updateEntity(requestDto, user);

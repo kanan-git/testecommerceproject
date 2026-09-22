@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false)
     private String password;
 
     @OneToOne
