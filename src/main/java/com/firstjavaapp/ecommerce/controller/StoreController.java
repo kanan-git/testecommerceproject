@@ -20,13 +20,13 @@ public class StoreController {
         this.storeService = storeService;
     }
 
-    @GetMapping("store/all")
+    @GetMapping("stores")
     public ApiResponseDto<List<StoreResponseDto>> getAllStores() {
         var stores = storeService.getAllStores();
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, stores);
     }
 
-    @GetMapping("store/all/{id}")
+    @GetMapping("stores/{id}")
     public ApiResponseDto<StoreResponseDto> getStoreById(@PathVariable Long id) {
         StoreResponseDto result = null;
         try {
@@ -37,7 +37,7 @@ public class StoreController {
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, result);
     }
 
-    @PostMapping("store/new")
+    @PostMapping("stores/new")
     public ApiResponseDto createStore(@Valid @RequestBody StoreRequestDto requestDto) {
         try {
             storeService.createStore(requestDto);
@@ -49,7 +49,7 @@ public class StoreController {
         return new ApiResponseDto(201, HttpStatus.CREATED.toString(), true);
     }
 
-    @PutMapping("store/edit/{id}")
+    @PutMapping("stores/{id}")
     public ApiResponseDto updateStore(@PathVariable Long id, @Valid @RequestBody StoreRequestDto requestDto) {
         try {
             storeService.updateStore(id, requestDto);
@@ -61,7 +61,7 @@ public class StoreController {
         return new ApiResponseDto(204, HttpStatus.NO_CONTENT.toString(), true);
     }
 
-    @DeleteMapping("store/delete/{id}")
+    @DeleteMapping("stores/{id}")
     public ApiResponseDto deleteStore(@PathVariable Long id) {
         try {
             storeService.deleteStore(id);

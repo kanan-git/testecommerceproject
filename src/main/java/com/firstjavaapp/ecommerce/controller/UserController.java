@@ -19,13 +19,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("user/all")
+    @GetMapping("users")
     public ApiResponseDto<List<UserResponseDto>> getAllUsers() {
         var users = userService.getAllUsers();
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, users);
     }
 
-    @GetMapping("user/all/{id}")
+    @GetMapping("users/{id}")
     public ApiResponseDto<UserResponseDto> getUserById(@PathVariable Long id) {
         UserResponseDto result = null;
         try {
@@ -36,7 +36,7 @@ public class UserController {
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, result);
     }
 
-    @PostMapping("user/new")
+    @PostMapping("users/new")
     public ApiResponseDto createUser(@Valid @RequestBody UserRequestDto requestDto) {
         try {
             userService.createUser(requestDto);
@@ -48,7 +48,7 @@ public class UserController {
         return new ApiResponseDto(201, HttpStatus.CREATED.toString(), true);
     }
 
-    @PutMapping("user/edit/{id}")
+    @PutMapping("users/{id}")
     public ApiResponseDto updateUser(@PathVariable Long id, @Valid @RequestBody UserRequestDto requestDto) {
         try {
             userService.updateUser(id, requestDto);
@@ -60,7 +60,7 @@ public class UserController {
         return new ApiResponseDto(204, HttpStatus.NO_CONTENT.toString(), true);
     }
 
-    @DeleteMapping("user/delete/{id}")
+    @DeleteMapping("users/{id}")
     public ApiResponseDto deleteUser(@PathVariable Long id) {
         try {
             userService.deleteUser(id);

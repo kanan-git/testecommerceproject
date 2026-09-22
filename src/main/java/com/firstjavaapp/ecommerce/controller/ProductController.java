@@ -20,13 +20,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("product/all")
+    @GetMapping("products")
     public ApiResponseDto<List<ProductResponseDto>> getAllProducts() {
         var products = productService.getAllProducts();
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, products);
     }
 
-    @GetMapping("product/all/{id}")
+    @GetMapping("products/{id}")
     public ApiResponseDto<ProductResponseDto> getProductById(@PathVariable Long id) {
         ProductResponseDto result = null;
         try {
@@ -37,7 +37,7 @@ public class ProductController {
         return new ApiResponseDto(200, HttpStatus.OK.toString(), true, result);
     }
 
-    @PostMapping("product/new")
+    @PostMapping("products/new")
     public ApiResponseDto createProduct(@Valid @RequestBody ProductRequestDto requestDto) {
         try {
             productService.createProduct(requestDto);
@@ -49,7 +49,7 @@ public class ProductController {
         return new ApiResponseDto(201, HttpStatus.CREATED.toString(), true);
     }
 
-    @PutMapping("product/edit/{id}")
+    @PutMapping("products/{id}")
     public ApiResponseDto updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDto requestDto) {
         try {
             productService.updateProduct(id, requestDto);
@@ -61,7 +61,7 @@ public class ProductController {
         return new ApiResponseDto(204, HttpStatus.NO_CONTENT.toString(), true);
     }
 
-    @DeleteMapping("product/delete/{id}")
+    @DeleteMapping("products/{id}")
     public ApiResponseDto deleteProduct(@PathVariable Long id) {
         try {
             productService.deleteProduct(id);
