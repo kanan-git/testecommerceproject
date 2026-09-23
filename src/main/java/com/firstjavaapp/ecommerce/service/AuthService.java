@@ -1,14 +1,21 @@
 package com.firstjavaapp.ecommerce.service;
 
+import com.firstjavaapp.ecommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService {
-//    User user = User.builder()
-//            .firstName(request.firstName())
-//            .lastName(request.lastName())
-//            .email(request.email())
-//            .password(passwordEncoder.encode(request.password()))
-//            .role(RoleEnum.USER)
-//            .build();
+    private final UserRepository userRepository;
+
+    public AuthService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void register() {
+        return;
+    }
+
+    public void login() {
+        return;
+    }
 }

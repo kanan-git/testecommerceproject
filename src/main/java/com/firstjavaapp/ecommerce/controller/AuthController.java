@@ -5,6 +5,8 @@ import com.firstjavaapp.ecommerce.dto.AuthResponseDto;
 import com.firstjavaapp.ecommerce.dto.LoginRequestDto;
 import com.firstjavaapp.ecommerce.dto.RegisterRequestDto;
 import com.firstjavaapp.ecommerce.enums.RoleEnum;
+import com.firstjavaapp.ecommerce.service.AuthService;
+import com.firstjavaapp.ecommerce.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
-//    private final
+    private final UserService userService;
+    private final AuthService authService;
 
-    public AuthController() {
-//        this.
+    public AuthController(UserService userService, AuthService authService) {
+        this.userService = userService;
+        this.authService = authService;
     }
 
     @PostMapping("auth/register")
