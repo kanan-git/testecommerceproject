@@ -3,7 +3,6 @@ package com.firstjavaapp.ecommerce.controller;
 import com.firstjavaapp.ecommerce.dto.ApiResponseDto;
 import com.firstjavaapp.ecommerce.dto.ProductRequestDto;
 import com.firstjavaapp.ecommerce.dto.ProductResponseDto;
-import com.firstjavaapp.ecommerce.dto.UserResponseDto;
 import com.firstjavaapp.ecommerce.exception.AlreadyExistException;
 import com.firstjavaapp.ecommerce.exception.NotFoundException;
 import com.firstjavaapp.ecommerce.service.ProductService;

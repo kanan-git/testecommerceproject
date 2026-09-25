@@ -6,8 +6,8 @@ import com.firstjavaapp.ecommerce.dto.LoginRequestDto;
 import com.firstjavaapp.ecommerce.dto.RegisterRequestDto;
 import com.firstjavaapp.ecommerce.enums.RoleEnum;
 import com.firstjavaapp.ecommerce.service.AuthService;
-import com.firstjavaapp.ecommerce.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +22,13 @@ public class AuthController {
 
     @PostMapping("auth/register")
     public ApiResponseDto register(@Valid @RequestBody RegisterRequestDto registerDto) {
-        return new ApiResponseDto(200, "", true);
+        authService.register(registerDto);
+        return new ApiResponseDto(200, HttpStatus.OK.toString(), true);
     }
 
     @PostMapping("auth/login")
     public ApiResponseDto<AuthResponseDto> login(@Valid @RequestBody LoginRequestDto loginDto) {
-        var claims = new AuthResponseDto("", new Long(0), "", RoleEnum.CUSTOMER);
-        return new ApiResponseDto(200, "", true, claims);
+        var result = authService.login(loginDto);
+        return new ApiResponseDto(200, HttpStatus.OK.toString(), true, result);
     }
 }

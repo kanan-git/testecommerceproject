@@ -2,72 +2,18 @@ package com.firstjavaapp.ecommerce.service;
 
 import com.firstjavaapp.ecommerce.entity.User;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+
 import javax.crypto.SecretKey;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Date;
+import java.util.function.Function;
 
-@Service
-public class JwtService {
-    private final String secret;
-    private final long expiration;
-
-    public JwtService(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.expiration}") long expiration
-    ) {
-        this.secret = secret;
-        this.expiration = expiration;
-    }
-
-//    private SecretKey getSigningKey() {
-//        return Keys.hmacShaKeyFor(
-//                secret.getBytes(StandardCharsets.UTF_8)
-//        );
-//    }
-
-//    public String generateToken(User user) {
-//        Date now = new Date();
-//        Date expirationDate = new Date(now.getTime() + expiration);
-//
-//        return Jwts.builder()
-//                .subject(user.getEmail())
-//                .issuedAt(now)
-//                .expiration(expirationDate)
-//                .signWith(getSigningKey())
-//                .compact();
-//    }
-
-//    public String extractUsername(String token) {
-//        return extractClaim(token, Claims::getSubject);
-//    }
-
-//    public boolean isTokenValid(String token, User user) {
-//        String username = extractUsername(token);
-//        return username.equals(user.getEmail()) && !isTokenExpired(token);
-//    }
-
-//    private boolean isTokenExpired(String token) {
-//        return extractExpiration(token).before(new Date());
-//    }
-
-//    private Date extractExpiration(String token) {
-//        return extractClaim(token, Claims::getExpiration);
-//    }
-
-//    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-//        Claims claims = extractAllClaims(token);
-//        return claimsResolver.apply(claims);
-//    }
-
-//    private Claims extractAllClaims(String token) {
-//        return Jwts.parser()
-//                .verifyWith(getSigningKey())
-//                .build()
-//                .parseSignedClaims(token)
-//                .getPayload();
-//    }
+public interface JwtService {
+    public SecretKey getSigningKey();
+    public String generateToken(User user);
+    public String extractUsername(String token);
+    public boolean isTokenValid(String token, User user);
+    public boolean isTokenExpired(String token);
+    public Date extractExpiration(String token);
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver);
+    public Claims extractAllClaims(String token);
 }
